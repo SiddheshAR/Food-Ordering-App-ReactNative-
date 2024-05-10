@@ -18,7 +18,7 @@ type ProductListProp = {
     // Handle button press
   };
     return(
-      <Link href={`/${product.id}`} asChild>
+      <Link href={`/menu/${product.id}`} asChild>
       <Pressable style={styles.container}>
         <Image source={{uri:product.image || defaultPizzaImage}} style={styles.image} />
         <Text style={styles.title}>{product.name}</Text>
