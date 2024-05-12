@@ -1,6 +1,5 @@
 import React from 'react'
 import {View,Text,StyleSheet} from 'react-native';
-
 const productPageComp = () => {
   return (
     <View style={styles.container}>
