@@ -4,20 +4,32 @@ import {useLocalSearchParams,Stack} from 'expo-router';
 import products from 'assets/data/products';
 import {useState} from 'react';
 import Button from '@/components/Button';
+import { useContext } from 'react';
+import { useCart } from '@/providers/cartProvider';
+import {PizzaSize,CartItem} from 'assets/types';
+
 const sizes = ['S','M','L','XL']
 
 const productPageComp = () => {
-  // console.log(products[id])
-  const [selectedSize,setSelectedSize] = useState('M')
+  const {items,addItem} = useCart();
+  const [selectedSize,setSelectedSize] = useState<PizzaSize>('M')
     const {id} = useLocalSearchParams();
-    // let ProdID = parseInt(id);
-    // if(products[parseInt(id)])
     let Product = products.find((p)=> p.id.toString() === id);
 
     const addToCart = ()=>{
-        console.warn(`User selected:${selectedSize}`)
+        if(!Product){
+          console.log('Product Doesnt Exists')
+        }else{
+          let ProductAdded:CartItem={
+            id:'1',
+            product:Product,
+            product_id:Product.id,
+            size:selectedSize,
+            quantity:1,
+          }
+          addItem(Product,selectedSize);
+        }
     }
-
     if(!Product){
       return(
         <View>
