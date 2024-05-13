@@ -1,16 +1,17 @@
 import React from 'react'
 import {View,Text,StyleSheet,Image,Pressable} from 'react-native';
-import {useLocalSearchParams,Stack} from 'expo-router';
+import {useLocalSearchParams,Stack,useRouter} from 'expo-router';
 import products from 'assets/data/products';
 import {useState} from 'react';
 import Button from '@/components/Button';
 import { useContext } from 'react';
 import { useCart } from '@/providers/cartProvider';
 import {PizzaSize,CartItem} from 'assets/types';
-
+import {randomUUID} from 'expo-crypto'
 const sizes = ['S','M','L','XL']
 
 const productPageComp = () => {
+  const router =useRouter();
   const {items,addItem} = useCart();
   const [selectedSize,setSelectedSize] = useState<PizzaSize>('M')
     const {id} = useLocalSearchParams();
@@ -21,13 +22,14 @@ const productPageComp = () => {
           console.log('Product Doesnt Exists')
         }else{
           let ProductAdded:CartItem={
-            id:'1',
+            id:randomUUID(),
             product:Product,
             product_id:Product.id,
             size:selectedSize,
             quantity:1,
           }
           addItem(Product,selectedSize);
+          router.push('/cart')
         }
     }
     if(!Product){
