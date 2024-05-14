@@ -1,11 +1,11 @@
 import React from 'react'
-import {View,Text,StyleSheet, Platform,Modal,Button, FlatList,Image } from 'react-native'
+import {View,Text,StyleSheet, Platform,Modal, FlatList,Image } from 'react-native'
 import {StatusBar} from 'expo-status-bar' 
 import {Link} from 'expo-router'
 import CartListItem from '@/components/cartItemsList'
 import { useContext } from 'react';
 import {useCart} from '../providers/cartProvider'
-
+import Button from '@/components/Button'
 // const CartItemShow = ({item})=>{
 //     return (
 //         <View>
@@ -25,7 +25,7 @@ import {useCart} from '../providers/cartProvider'
 
 const cart = ({}) => {
 // const {items} = useContext(CartContext)
-    const {items,addItem} =useCart();
+    const {items,addItem,totalPrice} =useCart();
   return (
     
     <View>
@@ -37,6 +37,8 @@ const cart = ({}) => {
         >
 
         </FlatList>
+        <Text>{totalPrice}</Text>
+        <Button text={`Checkout: ${totalPrice}`}></Button>
         <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
     </View>
    

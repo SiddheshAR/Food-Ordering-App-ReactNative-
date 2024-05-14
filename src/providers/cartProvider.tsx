@@ -6,25 +6,40 @@ type CartType={
     items:CartItem[];
     addItem:(product:Product ,size: CartItem['size']) => void;
     updateQuantity:(itemID:string,amount: 1 | -1)=>void;
+    totalPrice:number
 }
 const CartContext = createContext<CartType>({
     items:[],
     addItem:()=>{},
-    updateQuantity:()=>{}
+    updateQuantity:()=>{},
+    totalPrice:0
 });
 
 const CartProvider = ({children}) => {
-
+    
     const [items,setItems]= useState<CartItem[]>([]);
+    const totalPrice = items.reduce(
+        (sum,item)=>(sum+=item.product.price*item.quantity),0
+    )
     const addItem =(product:Product,size:CartItem['size'])=>{
-        let ProdObject:CartItem = {
-            id:randomUUID(), 
-            product,
-            product_id:product.id,
-            size,
-            quantity:1
+
+        const ExistingProduct = items.find((x)=>x.product == product && x.size == size);
+        if(ExistingProduct){
+            const updatedList = items.map((item)=>
+            item.product.name != product.name ? item:
+            {...item,quantity:item.quantity+1}
+            )
+            setItems(updatedList);
+        }else{
+            let ProdObject:CartItem = {
+                id:randomUUID(), 
+                product,
+                product_id:product.id,
+                size,
+                quantity:1
+            }
+            setItems([ProdObject,...items]);
         }
-        setItems([ProdObject,...items])
     }
     const updateQuantity=(itemID:string,amount: 1 | -1)=>{
         const updatedItems = items.map((item)=>
@@ -33,8 +48,9 @@ const CartProvider = ({children}) => {
         
         setItems(updatedItems);
     }
+
   return (
-    <CartContext.Provider value={{items,addItem,updateQuantity}}>
+    <CartContext.Provider value={{items,addItem,updateQuantity,totalPrice}}>
         {children}
     </CartContext.Provider>
   )

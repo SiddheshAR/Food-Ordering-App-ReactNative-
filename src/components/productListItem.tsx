@@ -1,5 +1,5 @@
 import { StyleSheet,Image,Pressable } from 'react-native';
-import {Link} from 'expo-router';
+import {Link, useSegments} from 'expo-router';
 import EditScreenInfo from '@/components/EditScreenInfo';
 import { Text, View } from '@/components/Themed';
 import Colours from '@/constants/Colors';
@@ -16,9 +16,12 @@ type ProductListProp = {
  export const ProductListItem = ({product}:ProductListProp)=>{
   const handlePress = () => {
     // Handle button press
+
   };
+  const Segement = useSegments();
+  // console.log(Segement[0]);
     return(
-      <Link href={`/menu/${product.id}`} asChild>
+      <Link href={`${Segement[0]}/menu/${product.id}`} asChild>
       <Pressable style={styles.container}>
         <Image source={{uri:product.image || defaultPizzaImage}} style={styles.image} />
         <Text style={styles.title}>{product.name}</Text>
