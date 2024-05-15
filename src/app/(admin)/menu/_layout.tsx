@@ -8,11 +8,11 @@ export default function MenuStack(){
     <Stack 
     screenOptions={{
       }}>
-        <Stack.Screen name="[id]" 
+        {/* <Stack.Screen name="[id]" 
         options={{
                   title: 'Menu',
                   headerRight: () => (
-                      <Link href="/" asChild>
+                      <Link href="(admin)/menu/create" asChild>
                       <Pressable>
                         {({ pressed }) => (
                           <FontAwesome
@@ -26,8 +26,7 @@ export default function MenuStack(){
                     </Link>
                   ),
         }}
-                // options={}
-        />
+        /> */}
         <Stack.Screen name="index" 
         options={{
                   title: 'Menu',

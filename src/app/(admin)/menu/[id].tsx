@@ -1,6 +1,6 @@
 import React from 'react'
 import {View,Text,StyleSheet,Image,Pressable} from 'react-native';
-import {useLocalSearchParams,Stack,useRouter} from 'expo-router';
+import {useLocalSearchParams,Stack,useRouter, Link} from 'expo-router';
 import products from 'assets/data/products';
 import {useState} from 'react';
 import Button from '@/components/Button';
@@ -8,6 +8,8 @@ import { useContext } from 'react';
 import { useCart } from '@/providers/cartProvider';
 import {PizzaSize,CartItem} from 'assets/types';
 import {randomUUID} from 'expo-crypto'
+import { FontAwesome } from '@expo/vector-icons';
+import Colors from '@/constants/Colors';
 const sizes = ['S','M','L','XL']
 
 const productPageComp = () => {
@@ -42,6 +44,25 @@ const productPageComp = () => {
   return (
     <View style={styles.container} >
         <Stack.Screen options={{'title':`${Product.name}`}} />
+        <Stack.Screen name="" 
+        options={{
+                  title: 'Menu',
+                  headerRight: () => (
+                      <Link href={`(admin)/menu/create?id=${id}`} asChild>
+                      <Pressable>
+                        {({ pressed }) => (
+                          <FontAwesome
+                            name="pencil-square-o"
+                            size={25}
+                            color={Colors.light.tint}
+                            style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                          />
+                        )}
+                      </Pressable>
+                    </Link>
+                  ),
+        }}
+        />
         <Image style={styles.image} source={{uri:Product.image}}/>
         <Text style={styles.productTitle}>{Product.name}</Text>
 
