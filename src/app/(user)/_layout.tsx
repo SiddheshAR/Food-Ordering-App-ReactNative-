@@ -6,7 +6,7 @@ import { Pressable } from 'react-native';
 import Colors from '@/constants/Colors';
 import { useColorScheme } from '@/components/useColorScheme';
 import { useClientOnlyValue } from '@/components/useClientOnlyValue';
-
+import orders from 'assets/data/orders';
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>['name'];
@@ -29,7 +29,6 @@ export default function TabLayout() {
         <Tabs.Screen name="index" options={{href:null}} />
       <Tabs.Screen
         name="menu"
-        
         options={{
           title: 'Menu',
           headerShown:false,
@@ -51,9 +50,10 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="orders"
         options={{
           title: 'Orders',
+          headerTitleAlign:'center',
           tabBarIcon: ({ color }) => <TabBarIcon name="list" color={color} />,
         }}
       />
