@@ -52,8 +52,9 @@ export default function TabLayout() {
       <Tabs.Screen
         name="orders"
         options={{
-          title: 'Orders',
-          headerTitleAlign:'center',
+          headerShown:false,
+          // title: 'Orders',
+          // headerTitleAlign:'center',
           tabBarIcon: ({ color }) => <TabBarIcon name="list" color={color} />,
         }}
       />

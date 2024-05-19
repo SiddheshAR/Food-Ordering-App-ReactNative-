@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View,StyleSheet, } from 'react-native'
+import { Text, View,StyleSheet, Pressable, } from 'react-native'
 import dayjs from 'dayjs'
 import { useSegments ,Link} from 'expo-router';
 const OrderListitem = ({item}) => {
@@ -13,6 +13,7 @@ const OrderListitem = ({item}) => {
 
   return (
     <Link href={`${Segment[0]}/orders/${item.id}`} asChild>
+        <Pressable>
         <View style={styles.objCtn}>
             <View style={styles.childCtn1}>
                 <Text style={styles.orderTitle}>Order No. {item.id}</Text>
@@ -22,6 +23,7 @@ const OrderListitem = ({item}) => {
                 <Text  style={styles.orderStatus}>{item.status}</Text>
             </View>
         </View>
+        </Pressable>
     </Link>
   )
 }
