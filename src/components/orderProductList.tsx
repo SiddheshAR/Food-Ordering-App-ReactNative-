@@ -8,7 +8,7 @@ import { useCart } from '@/providers/cartProvider';
 
 
 const OrderProdList = ({ item }) => {
-  console.log(item)
+  
   return (
     <View style={styles.container}>
       <Image

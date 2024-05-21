@@ -7,9 +7,6 @@ import {ProductListItem} from '@/components/productListItem';
 
 export default function TabOneScreen() {
 
-  const product= productData[0] ;
-  const product2= productData[3] ;
-
   return (
     <View style={{backgroundColor:'#e6e6e6'}}>
       <FlatList 
