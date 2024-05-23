@@ -6,6 +6,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import CartProvider from '@/providers/cartProvider';
 import { useColorScheme } from '@/components/useColorScheme';
+import AuthProvider from '@/providers/AuthProvider'
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -49,6 +50,7 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <AuthProvider>
       <CartProvider>
       <Stack>
         <Stack.Screen name="(user)" options={{ headerShown: false }} />
@@ -57,6 +59,7 @@ function RootLayoutNav() {
         {/* <Stack.Screen name="modal" options={{ presentation: 'modal' }} /> */}
       </Stack>
       </CartProvider>
+      </AuthProvider>
     </ThemeProvider>
   );
 }

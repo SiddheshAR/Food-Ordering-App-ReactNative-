@@ -2,13 +2,31 @@ import Colors from '@/constants/Colors';
 import { FontAwesome } from '@expo/vector-icons';
 import { Link, Stack, Tabs, useRouter } from 'expo-router';
 import React,{useState} from 'react';
-import { View, Text, StyleSheet, Pressable, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Pressable, TextInput, Alert } from 'react-native';
 import Button from '@/components/Button';
+import { supabase } from '@/lib/supabase';
+
 
 const SignUp = () => {
-  const router = useRouter();
+const router = useRouter();
 const [email,setEmail]=useState<string>('');
 const [password,setPassword]=useState<string>('');
+
+const [loading,setLoading] =useState(false);
+const signUpWithEmail =async()=>{
+    setLoading(true);
+    const { error } = await supabase.auth.signUp({
+        email: email,
+        password: password,
+      });
+      if (error) Alert.alert(error.message);
+      setLoading(false);
+}
+
+// const signUpWithEmail =()=>{
+//     console.warn("Hii")
+// }
+
   return (
     <View style={styles.container}>
         <Stack.Screen name="" 
@@ -46,7 +64,7 @@ const [password,setPassword]=useState<string>('');
                 secureTextEntry={true}  style={styles.inputField}></TextInput>
             </View>
             <View>
-                <Button text={'Sign Up'}></Button>
+                <Button onPress={signUpWithEmail} disabled={loading} text={loading?"Creating Account...":"Create Account"}></Button>
             </View>
     </View>
   );
